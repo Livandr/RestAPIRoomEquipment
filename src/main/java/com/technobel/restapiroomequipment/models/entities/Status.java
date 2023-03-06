@@ -1,5 +1,7 @@
-package com.gestionsalledecours.models.entities;
+package com.technobel.restapiroomequipment.models.entities;
 
+import com.technobel.restapiroomequipment.models.entities.users.Admin;
+import com.technobel.restapiroomequipment.models.entities.users.Person;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,5 +28,5 @@ public class Status extends BaseEntity<Long> {
 
     @ManyToOne
     @JoinColumn(name = "changed_by_id")
-    private Admin changedBy;
+    private Person changedBy;
 }

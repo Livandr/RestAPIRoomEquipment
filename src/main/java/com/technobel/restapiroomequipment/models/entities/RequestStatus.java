@@ -1,4 +1,4 @@
-package com.gestionsalledecours.models.entities;
+package com.technobel.restapiroomequipment.models.entities;
 
 public enum RequestStatus {
 

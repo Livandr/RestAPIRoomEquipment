@@ -1,4 +1,4 @@
-package com.technobel.restapiroomequipment.config;
+package com.technobel.restapiroomequipment.config.security;
 
 import com.technobel.restapiroomequipment.utils.JwtProvider;
 import jakarta.servlet.FilterChain;
@@ -22,11 +22,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-            //1. extraire le token
-            String token = jwtProvider.extractToken(request);
+        //1. extraire le token
+        String token = jwtProvider.extractToken(request);
 
-            //2. valider le token
-            if (token != null && jwtProvider.validateToken(token)) {
+        //2. valider le token
+        if (token != null && jwtProvider.validateToken(token)) {
 
             //3. récupérer la pers liée au token
             //4. créer une authentification
@@ -35,6 +35,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             //5. placer l'authentification dans le SecurityContextHolder
             SecurityContextHolder.getContext().setAuthentication(auth);
         }
-            filterChain.doFilter(request, response);
+
+        filterChain.doFilter(request, response);
     }
 }

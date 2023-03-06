@@ -1,2 +1,5 @@
-package com.technobel.restapiroomequipment.models.forms;public @interface MaxTime {
+package com.technobel.restapiroomequipment.models.forms;
+
+public @interface MaxTime {
+    int h();
 }

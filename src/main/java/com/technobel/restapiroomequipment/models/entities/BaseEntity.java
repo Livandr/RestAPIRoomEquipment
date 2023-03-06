@@ -1,5 +1,6 @@
-package com.gestionsalledecours.models.entities;
+package com.technobel.restapiroomequipment.models.entities;
 
+import com.technobel.restapiroomequipment.models.entities.users.Person;
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.PrePersist;
@@ -29,4 +30,7 @@ public abstract class BaseEntity <TID>{
     public void preUpdate() {
         lastModifiedAt = LocalDateTime.now();
     }
+
+
+
 }

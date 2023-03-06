@@ -1,5 +1,7 @@
-package com.technobel.restapiroomequipment.models.entities;
+package com.technobel.restapiroomequipment.models.entities.users;
 
+import com.technobel.restapiroomequipment.models.entities.Address;
+import com.technobel.restapiroomequipment.models.entities.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,9 +15,11 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
-@Table(name = "person")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//@Table(name = "person")
+@DiscriminatorColumn(name = "role")
 @Getter @Setter
-public class Person implements UserDetails {
+public class Person extends BaseEntity<Long> implements UserDetails{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,47 +32,40 @@ public class Person implements UserDetails {
     @Column(nullable = false)
     private String firstname;
 
+    @Column(name = "role", nullable = false, insertable = false, updatable = false)
+    private String role;
+
     @Column(nullable = false, unique = true)
-    private String login;
+    private String username;
     @Column(nullable = false)
     private String password;
     @Column(nullable = false)
     private String email;
-    @Enumerated(EnumType.STRING)
-    @ElementCollection
-    private Set<PersonRole> roles = new LinkedHashSet<>();
+    @Column
+    private String phone;
+    @Column
+    private Address address;
     @Column(nullable = false)
     private boolean enabled;
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles.stream()
-                .map((role) -> new SimpleGrantedAuthority(("ROLE_"+role)))
-                .collect(Collectors.toSet());
+        return null;
     }
 
     @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getLogin(){
-        return login;
-    }
-
-    public Set<PersonRole> getRoles() {
-        return roles;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
+    public String getUsername() {
+        return username;
     }
 
     @Override
     public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
         return true;
     }
 

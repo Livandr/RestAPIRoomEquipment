@@ -1,6 +1,7 @@
-package com.technobel.restapiroomequipment.config;
+package com.technobel.restapiroomequipment.config.security;
 
-import com.technobel.restapiroomequipment.models.entities.users.Teacher;
+import com.technobel.restapiroomequipment.config.security.JwtAuthenticationFilter;
+import com.technobel.restapiroomequipment.models.forms.RegisterUserForm;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -49,24 +50,38 @@ public class SecurityConfig {
                         .requestMatchers("/security/test/**").denyAll()
                         .requestMatchers("/security/test/*", "/security/t?st").denyAll()
 
-                        .requestMatchers(HttpMethod.POST).hasRole("ADMIN")
+//                        .requestMatchers(HttpMethod.POST).hasRole("ADMIN")
 
-                        .requestMatchers( request -> request.getRequestURI().length() > 50 ).denyAll()
+//                        .requestMatchers( request -> request.getRequestURI().length() > 50 ).denyAll()
 
-                        .requestMatchers(HttpMethod.POST, "/room/**").hasAnyRole("ADMIN")
-                        .requestMatchers(HttpMethod.GET, "/room/**").authenticated()
-                        .requestMatchers(HttpMethod.PUT).hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PATCH).hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE,"/room/**").hasAnyRole("ADMIN")
+                        //Room
+//                        .requestMatchers(HttpMethod.POST, "/room/**").hasRole("ADMIN")
 
-                        .requestMatchers(HttpMethod.POST, "/auth/register").hasRole("STUDENT")
+                        .requestMatchers(HttpMethod.GET, "/room/all").authenticated()
+
+                        .requestMatchers(HttpMethod.PUT, "/room/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PATCH, "/room/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE,"/room/**").hasRole("ADMIN")
+
+
+                        //Auth
+                        .requestMatchers(HttpMethod.POST, "/auth/register").anonymous()
+
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
 
 
+
+                        //Request
+                        .requestMatchers(HttpMethod.GET,"/request/").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET,"/request/all").hasRole("ADMIN")
+
+                        .requestMatchers(HttpMethod.GET,"/request/{id:[0-9]+}/**").hasAnyRole("ADMIN","TEACHER","STUDENT" )
+
+                        .requestMatchers(HttpMethod.PATCH, "/request/{id:[0-9]+}").hasAnyRole("ADMIN","TEACHER","STUDENT" )
                         .requestMatchers(HttpMethod.POST,"/request/new").hasAnyRole("STUDENT", "TEACHER")
                         .requestMatchers(HttpMethod.DELETE,"/request/cancel").hasAnyRole("STUDENT", "TEACHER")
 
-                        .anyRequest().permitAll()
+                        .anyRequest().authenticated()
         );
 
         return http.build();
