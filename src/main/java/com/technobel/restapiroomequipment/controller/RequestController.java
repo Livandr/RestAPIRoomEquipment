@@ -72,22 +72,26 @@ public class RequestController {
 //        }
 //    }
 
+
+    //Les profs et les étudiants peuvent annuler leurs résa
     @DeleteMapping("{id:[0-9]+}/cancel")
     public void cancelRequest(@PathVariable long id){
         requestService.cancelRequest(id);
     }
 
-    @PatchMapping("/{id:[0-9]+}/{status:ACCEPTED}")
+
+    //Les admins peuvent modifient le statut de la requête
+    @PatchMapping("/{id:[0-9]+}/accepted")
     public void acceptRequest(@PathVariable long id, @PathVariable String status){
         requestService.acceptRequest(id, "accepted");
     }
 
-    @PatchMapping("/{id:[0-9]+}/{status:REFUSED}")
+    @PatchMapping("/{id:[0-9]+}/refused")
     public void refuseRequest(@PathVariable long id, @PathVariable String status){
         requestService.refuseRequest(id, "not available/room not for student");
     }
 
-    @PatchMapping("/{id:[0-9]+}/{status:RELOCATING}")
+    @PatchMapping("/{id:[0-9]+}/relocating")
     public void relocateRequest(@PathVariable long id, @PathVariable String status){
        requestService.relocateRequest(id, "relocating");
     }

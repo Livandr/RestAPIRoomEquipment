@@ -1,6 +1,9 @@
 package com.technobel.restapiroomequipment.models.forms;
 
 import com.technobel.restapiroomequipment.models.entities.Request;
+import com.technobel.restapiroomequipment.validation.constraints.MaxTime;
+import com.technobel.restapiroomequipment.validation.constraints.MinFuture;
+import com.technobel.restapiroomequipment.validation.constraints.MinTime;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -24,9 +27,10 @@ public class RequestForm {
     private Integer neededCapacity;
     @MinFuture(amount = 3, unit = ChronoUnit.DAYS)
     private LocalDate date;
-    @MinTime(h=8, m=30)
+    @MinTime(h = 8, m = 30, s = 0)
+    @NotBlank
     private LocalTime beginAt;
-    @MaxTime(h=20)
+    @MaxTime(h = 20, m = 0, s = 0)
     private LocalTime endAt;
     private List<Long> equipmentIds;
 
@@ -49,6 +53,5 @@ public class RequestForm {
         return request;
     }
 
-//    public int getStatusChange() {
-//    }
+
 }
