@@ -1,6 +1,7 @@
 package com.technobel.restapiroomequipment.models.forms;
 
 import com.technobel.restapiroomequipment.models.entities.Address;
+import com.technobel.restapiroomequipment.models.entities.users.Admin;
 import com.technobel.restapiroomequipment.models.entities.users.Student;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -42,4 +43,6 @@ public class RegisterUserForm {
 
         return student;
     }
+
+
 }

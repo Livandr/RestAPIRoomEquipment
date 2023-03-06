@@ -12,7 +12,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/room")
 public class RoomController {
-
     private final RoomService roomService;
     private final EquipmentService equipmentService;
 
@@ -24,6 +23,7 @@ public class RoomController {
     //Les utilisateurs connectés peuvent voir toutes les salles
     @GetMapping({"", "/all"})
     public List<RoomDTO> getAll(){
+
         return roomService.getAll();
     }
 

@@ -82,12 +82,12 @@ public class RequestController {
         requestService.acceptRequest(id, "accepted");
     }
 
-    @PutMapping("/{id:[0-9]+}/{status:REFUSED}")
+    @PatchMapping("/{id:[0-9]+}/{status:REFUSED}")
     public void refuseRequest(@PathVariable long id, @PathVariable String status){
         requestService.refuseRequest(id, "not available/room not for student");
     }
 
-    @PutMapping("/{id:[0-9]+}/{status:RELOCATING}")
+    @PatchMapping("/{id:[0-9]+}/{status:RELOCATING}")
     public void relocateRequest(@PathVariable long id, @PathVariable String status){
        requestService.relocateRequest(id, "relocating");
     }

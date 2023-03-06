@@ -20,7 +20,7 @@ public class AuthController {
         this.authService = authService;
     }
 
-
+    //L'admin enregistre la demande d'inscription
     //POST - http://localhost:8080/auth/register
     @PostMapping("/register")
     public PersonDTO register(@RequestBody @Valid RegisterUserForm form){

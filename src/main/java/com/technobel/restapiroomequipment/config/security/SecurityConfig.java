@@ -70,7 +70,6 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
 
 
-
                         //Request
                         .requestMatchers(HttpMethod.GET,"/request/").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET,"/request/all").hasRole("ADMIN")
@@ -81,7 +80,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST,"/request/new").hasAnyRole("STUDENT", "TEACHER")
                         .requestMatchers(HttpMethod.DELETE,"/request/cancel").hasAnyRole("STUDENT", "TEACHER")
 
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
         );
 
         return http.build();

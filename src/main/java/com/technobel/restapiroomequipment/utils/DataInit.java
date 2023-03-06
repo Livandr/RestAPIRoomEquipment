@@ -61,22 +61,44 @@ public class DataInit implements InitializingBean {
         teacher1.setLastname("leguet");
         teacher1.setFirstname("patrick");
         teacher1.setEmail("pl@athenee.be");
-        teacher1.setUsername("director");
-        teacher1.setPassword("test123.");
+        teacher1.setUsername("teacher1");
+        teacher1.setPassword(encoder.encode("test123."));
         teacher1.setEnabled(true);
+
+        Teacher teacher2 = new Teacher();
+        teacher2.setLastname("leprof");
+        teacher2.setFirstname("jean");
+        teacher2.setEmail("jl@athenee.be");
+        teacher2.setUsername("teacher2");
+        teacher2.setPassword(encoder.encode("test1234"));
+        teacher2.setEnabled(true);
+
 
         Student student1 = new Student();
         student1.setLastname("bono");
         student1.setFirstname("ralph");
         student1.setEmail("rb@gmail.com");
         student1.setUsername("rb2022");
-        student1.setPassword("12345678");
+        student1.setPassword(encoder.encode("test123."));
         student1.setEnabled(true);
+
+        Student student2 = new Student();
+        student2.setLastname("arti");
+        student2.setFirstname("ben");
+        student2.setEmail("ba@gmail.com");
+        student2.setUsername("ba2025");
+        student2.setPassword(encoder.encode("test123."));
+        student2.setEnabled(true);
+
 
 
         admin1 = personRepository.save(admin1);
+
         teacher1 = personRepository.save(teacher1);
+        teacher2 = personRepository.save(teacher2);
+
         student1 = personRepository.save(student1);
+        student2 = personRepository.save(student2);
 
         Room room1 = new Room();
         room1.setRoomName("Mario");
